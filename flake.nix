@@ -1,5 +1,5 @@
 {
-  description = "nixos & home-manager configurations";
+  description = "a home manager module for easily managing mutable but reproducible files with diff generation";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
@@ -7,7 +7,10 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,14 +21,13 @@
     { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      flake = {
-        homeModules.default = { ... }: { }; # TODO
-      };
+      flake.homeModules.default = ./home-module.nix;
 
-      # The following stuff is only necessary for development
+      # The following is only relevant for development.
       imports = with inputs; [
-        devshell.flakeModule
-        treefmt-nix.flakeModule
+        # Handle downstream flakes setting input-follows to "".
+        devshell.flakeModule or ({ ... }: { })
+        treefmt-nix.flakeModule or ({ ... }: { })
       ];
       perSystem = { pkgs, ... }: {
         devshells.default = (
