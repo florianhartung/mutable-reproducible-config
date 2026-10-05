@@ -4,8 +4,8 @@
   ...
 }:
 {
-  options.programs.zed-editor.mutableAndReproducibleSettings = lib.mkEnableOption "mutable and reproducible config file handling for the settings";
-  config = lib.mkIf config.programs.zed-editor.mutableAndReproducibleSettings {
+  options.programs.zed-editor.mutableAndReproducibleUserSettings = lib.mkEnableOption "mutable and reproducible config file handling for the user settings";
+  config = lib.mkIf config.programs.zed-editor.mutableAndReproducibleUserSettings {
     xdg.configFile."zed/settings.json" = {
       mutableAndReproducible = true;
       force = true;
