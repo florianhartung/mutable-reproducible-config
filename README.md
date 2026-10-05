@@ -3,8 +3,13 @@
 > [!WARNING]
 > Under construction
 
-My previous development notes are available in
-[HOME_DOTFILE_HANDLING.md](./HOME_DOTFILE_HANDLING.md).
+Example configuration: https://github.com/florianhartung/nix-config/blob/1ff5323b9a91a941fc58aae3761831d9477486d9/users/flo.nix
+
+Examples for generated diffs: https://github.com/florianhartung/nix-config/tree/1ff5323b9a91a941fc58aae3761831d9477486d9/backup-diffs
+
+> [!NOTE]
+> My previous development notes are available in
+> [HOME_DOTFILE_HANDLING.md](./HOME_DOTFILE_HANDLING.md).
 
 ## Attribution
 
